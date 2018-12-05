@@ -7,7 +7,7 @@ class Task
   end
 
   def self.all
-    returned_tasks = DB.exec("SELECT * FROM taks;")
+    returned_tasks = DB.exec("SELECT * FROM tasks;")
     tasks = []
     returned_tasks.each do |task|
       description = task.fetch("description")
@@ -18,6 +18,10 @@ class Task
 
   def ==(another_task)
     self.description().==(another_task.description())
+  end
+
+  def save
+    DB.exec("INSERT INTO tasks (description) VALUES ('#{@description}');")
   end
 
 end
